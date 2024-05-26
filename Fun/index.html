@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebSocket Compiler Test</title>
+</head>
+<body>
+	<h1>WebSocket Compiler Test</h1>
+	<textarea type="text" id="message" placeholder="Type a message..."></textarea>
+	<button onclick="sendMessage()">Send</button>
+	<hr>
+	<textarea type="text" id="output" readonly></textarea>
+
+	<script>
+    let secure = window.location.protocol.includes('https') ? 's':'';
+		var socket = new WebSocket("ws"+secure+"://" + window.location.host + "/ws/hell");
+		
+		socket.onopen = function(event) {
+			console.log("WebSocket connected!");
+		}
+
+		socket.onmessage = function(event) {
+			console.log("Received message:", event.data);
+			document.getElementById("output").innerHTML = event.data;
+		}
+
+		function sendMessage() {
+			var message = document.getElementById("message").value;
+			socket.send(message);
+			console.log("Sent message:", message);
+		}
+	</script>
+</body>
+</html>
