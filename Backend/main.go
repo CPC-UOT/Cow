@@ -118,4 +118,6 @@ func main() {
 			wrongAsnwers += 1
 		}
 	})
+
+	r.Run(":7000")
 }
