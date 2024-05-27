@@ -140,11 +140,11 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:7000/correct")
+    fetch("http://172.20.10.4:7000/correct")
       .then(res => (res.json()))
       .then(c => this.CorrectAnswers = c)
 
-    fetch("http://localhost:7000/wrong")
+    fetch("http://172.20.10.4:7000/wrong")
       .then(res => res.json())
       .then(c => this.trying = c)
     this.setOutput("")
@@ -154,7 +154,7 @@ export default {
     sendActived() {
       this.runActived()
       .then(() => {
-      fetch("http://localhost:7000/code/check")
+      fetch("http://172.20.10.4:7000/code/check")
         .then(response => {
           console.log(response.status)
           if (response.status === 200) {
@@ -175,7 +175,7 @@ export default {
           body: this.store.state.code
       };
 
-      await fetch('http://localhost:7000/code', requestOptions)
+      await fetch('http://172.20.10.4:7000/code', requestOptions)
         .then(response => {
           if (response.status === 400) {
             this.compErr = true;
