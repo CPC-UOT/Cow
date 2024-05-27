@@ -35,7 +35,7 @@ func main() {
 
 	r.GET("/correct", func(c *gin.Context) { c.JSON(http.StatusOK, correctAnswers) })
 	r.GET("/wrong", func(c *gin.Context) { c.JSON(http.StatusOK, wrongAsnwers) })
-	r.POST("/setcorrect/:amount", func(c *gin.Context) {
+	r.GET("/setcorrect/:amount", func(c *gin.Context) {
 		amount := c.Param("amount")
 		num, err := strconv.Atoi(amount)
 		if err != nil {
@@ -44,7 +44,7 @@ func main() {
 		correctAnswers = num
 	})
 
-	r.POST("/setwrong/:amount", func(c *gin.Context) {
+	r.GET("/setwrong/:amount", func(c *gin.Context) {
 		amount := c.Param("amount")
 		num, err := strconv.Atoi(amount)
 		if err != nil {
@@ -77,17 +77,16 @@ func main() {
 		if err != nil {
 			res = compOut
 			c.JSON(http.StatusBadRequest, string(res))
-			if err != nil {
-				// panic(err)
-				log.Printf("%s, error while writing message\n", err.Error())
-				c.AbortWithError(http.StatusInternalServerError, err)
-				return
-			}
+			// panic(err)
+			log.Printf("%s, error while writing message\n", err.Error())
+			c.AbortWithError(http.StatusInternalServerError, err)
+			return
 		} else {
-			exe := exec.Command("/usr/bin/bash", "-c", "./code/run.sh")
+			exe := exec.Command("/usr/bin/env", "bash", "-c", "./code/run.sh")
 
 			res, err = exe.Output()
 			if err != nil {
+				log.Printf(err.Error())
 				c.JSON(http.StatusBadRequest, string(res))
 				return
 			}
@@ -101,7 +100,7 @@ func main() {
 	r.GET("/code/check", func(c *gin.Context) {
 		b := true
 
-		exe := exec.Command("/usr/bin/bash", "-c", "./code/test.sh")
+		exe := exec.Command("/usr/bin/env", "bash", "-c", "./code/test.sh")
 
 		_, err := exe.Output()
 		log.Println(err)

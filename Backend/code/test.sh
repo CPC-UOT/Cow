@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "/home/coll/Stuff/Dev/CPC/Fun/code/"
+cd "/home/coll/Dev/Cow/Backend/code"
 
 for i in $(seq 1 10);
 do
