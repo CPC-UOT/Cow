@@ -71,7 +71,7 @@
       سيكون لديك ملف blist.out المطلوب منك إدخال إليه العدد الأدنى من الدلاء
       التي يحتاجها صاحب المزرعة.
     </h3>
-    <h3 style="display:none">
+    <h3 style="">
       <span style="font-weight: 800">عينة توضيحية</span>
       <br />
       - المدخلات (من اليسار الى اليمين)
@@ -126,11 +126,13 @@ import Icon from "../components/Icon.vue";
 </script>
 <script>
 import swal from "sweetalert2";
+let urlPath = process.env.VUE_APP_BACKEND_URL
 export default {
   name: "Home-view",
   data() {
     return {
       store,
+      urlPath,
       trying: 0,
       CorrectAnswers: 0,
       checkAnswer: false,
@@ -140,11 +142,11 @@ export default {
     };
   },
   mounted() {
-    fetch("http://172.20.10.4:7000/correct")
+    fetch(`${this.urlPath}/correct`)
       .then(res => (res.json()))
       .then(c => this.CorrectAnswers = c)
 
-    fetch("http://172.20.10.4:7000/wrong")
+    fetch(`${this.urlPath}/wrong`)
       .then(res => res.json())
       .then(c => this.trying = c)
     this.setOutput("")
@@ -154,7 +156,7 @@ export default {
     sendActived() {
       this.runActived()
       .then(() => {
-      fetch("http://172.20.10.4:7000/code/check")
+      fetch(`${this.urlPath}/code/check`)
         .then(response => {
           console.log(response.status)
           if (response.status === 200) {
@@ -175,7 +177,7 @@ export default {
           body: this.store.state.code
       };
 
-      await fetch('http://172.20.10.4:7000/code', requestOptions)
+      await fetch(`${this.urlPath}/code`, requestOptions)
         .then(response => {
           if (response.status === 400) {
             this.compErr = true;
