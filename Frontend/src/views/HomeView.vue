@@ -61,7 +61,7 @@
       <span style="font-weight: 800">المدخلات</span>
       <br />
       سيكون لديك ملف blist.in يحتوي في أول سطر على عدد الأبقار N, وكل سطر بعد
-      ذالك يحتوي على معلومات كل بقرة s<sub>i</sub> t<sub>i</sub> و b<sub>i</sub>
+      ذالك يحتوي على معلومات كل بقرة t<sub>i</sub> s<sub>i</sub> و b<sub>i</sub>
       مفصولين بمسافة. كلا من s<sub>i</sub> و t<sub>i</sub> عدد صحيح في نطاق
       1...1000 بينما b<sub>i</sub> عدد صحيح يتراوح بين 1...10.
     </h3>
@@ -71,11 +71,17 @@
       سيكون لديك ملف blist.out المطلوب منك إدخال إليه العدد الأدنى من الدلاء
       التي يحتاجها صاحب المزرعة.
     </h3>
-    <h3 style="">
+    <h3 style="display:normal">
       <span style="font-weight: 800">عينة توضيحية</span>
       <br />
       - المدخلات (من اليسار الى اليمين)
       <br />
+      <span style="color: #969aa6">N</span>
+      <br />
+      <span style="color: #969aa6"
+        >s<sub>i</sub> t<sub>i</sub> b<sub>i</sub></span
+      >
+      <br /> 
       3
       <br />
       <bdi> 4 10 1</bdi>
